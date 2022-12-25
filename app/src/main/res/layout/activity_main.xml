@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        style="@style/title"
+        android:text="@string/toppings" />
+
+
+    <CheckBox
+        android:id="@+id/checkbox_whipped_cream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="24dp"
+        android:text="@string/whipped_cream" />
+
+    <TextView
+        android:id="@+id/quantity_text"
+        style="@style/title"
+        android:layout_marginTop="16dp"
+        android:text="@string/quantity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/min_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="@string/minusButton" />
+
+        <TextView
+            android:id="@+id/quantity_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/_0"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="@string/plusButton" />
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/title"
+        android:layout_marginTop="16dp"
+        android:text="@string/order_summary" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/initPrice"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/order_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/order" />
+
+
+</LinearLayout>

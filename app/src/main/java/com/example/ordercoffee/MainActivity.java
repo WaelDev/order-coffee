@@ -6,15 +6,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
-    int quantity = 0;
+    int quantity = 1;
     static final int PRICE_OF_ONE_COFFEE = 5;
     boolean hasWhippedCream = false;
+    boolean hasChocolate = false;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
             Log.v("MainActivity", "Quantity : " + quantity);
             submitOrder();
         });
-
-
-
     }
 
     private void increment() {
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void decrement() {
-        if (quantity > 0) {
+        if (quantity > 1) {
             quantity--;
             displayQuantity();
         }
@@ -60,15 +60,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void submitOrder() {
         TextView priceTextView = findViewById(R.id.price);
-        CheckBox whippedCreamCheck = findViewById(R.id.checkbox_whipped_cream);
-        hasWhippedCream = whippedCreamCheck.isChecked();
+        CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream_checkbox);
+        hasWhippedCream = whippedCreamCheckBox.isChecked();
+
+        CheckBox chocolateCheckBox = findViewById(R.id.chocolate_checkbox);
+        hasChocolate =  chocolateCheckBox.isChecked();
+
+        EditText nameEditText = findViewById(R.id.name_editText);
+        name =  nameEditText.getText().toString();
+
         Log.v("MainActivity", "Whipped cream : " + hasWhippedCream);
+        Log.v("MainActivity", "Chocolate : " + hasChocolate);
+        Log.v("MainActivity", "name : " + name);
         priceTextView.setText(displayMessage());
     }
 
     private String displayMessage() {
-        return "Name: Wael Eddine" +
+        return "Name: " + name +
                 "\nAdd whipped cream ? " + hasWhippedCream +
+                "\nAdd Chocolate ? " + hasChocolate +
                 "\nQuantity: " + quantity +
                 "\nTotal: " + NumberFormat.getCurrencyInstance().format(calculatePrice()) +
                 "\nThank you!";
@@ -80,6 +90,15 @@ public class MainActivity extends AppCompatActivity {
      * @return total price
      */
     private int calculatePrice() {
-        return quantity * PRICE_OF_ONE_COFFEE;
+        if(hasChocolate){
+            if(hasWhippedCream){
+                return (PRICE_OF_ONE_COFFEE + 2 + 1) * quantity;
+            }
+            return  (PRICE_OF_ONE_COFFEE + 2) * quantity;
+        } else if (hasWhippedCream) {
+            return  (PRICE_OF_ONE_COFFEE + 1) * quantity;
+        } else {
+           return PRICE_OF_ONE_COFFEE  * quantity;
+        }
     }
 }

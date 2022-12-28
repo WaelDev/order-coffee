@@ -2,6 +2,8 @@ package com.example.ordercoffee;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         if (quantity > 1) {
             quantity--;
             displayQuantity();
-        }else {
+        } else {
             Toast.makeText(this, "You can't have less than 1 coffee", Toast.LENGTH_SHORT).show();
         }
     }
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void submitOrder() {
+
         TextView priceTextView = findViewById(R.id.price);
         CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream_checkbox);
         hasWhippedCream = whippedCreamCheckBox.isChecked();
@@ -76,7 +79,26 @@ public class MainActivity extends AppCompatActivity {
         Log.v("MainActivity", "Whipped cream : " + hasWhippedCream);
         Log.v("MainActivity", "Chocolate : " + hasChocolate);
         Log.v("MainActivity", "name : " + name);
-        priceTextView.setText(displayMessage());
+
+        composeEmail("Just Java app for " + name, displayMessage());
+
+//        priceTextView.setText(displayMessage());
+    }
+
+    private void composeEmail(String subject, String text) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+//        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Toast.makeText(MainActivity.this, "There is no application that support this action",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     private String displayMessage() {

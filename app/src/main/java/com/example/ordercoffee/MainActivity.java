@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.NumberFormat;
 
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void increment() {
-        quantity++;
+        if (quantity < 100)
+            quantity++;
         displayQuantity();
     }
 
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         if (quantity > 1) {
             quantity--;
             displayQuantity();
+        }else {
+            Toast.makeText(this, "You can't have less than 1 coffee", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -64,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
         hasWhippedCream = whippedCreamCheckBox.isChecked();
 
         CheckBox chocolateCheckBox = findViewById(R.id.chocolate_checkbox);
-        hasChocolate =  chocolateCheckBox.isChecked();
+        hasChocolate = chocolateCheckBox.isChecked();
 
         EditText nameEditText = findViewById(R.id.name_editText);
-        name =  nameEditText.getText().toString();
+        name = nameEditText.getText().toString();
 
         Log.v("MainActivity", "Whipped cream : " + hasWhippedCream);
         Log.v("MainActivity", "Chocolate : " + hasChocolate);
@@ -90,15 +94,15 @@ public class MainActivity extends AppCompatActivity {
      * @return total price
      */
     private int calculatePrice() {
-        if(hasChocolate){
-            if(hasWhippedCream){
+        if (hasChocolate) {
+            if (hasWhippedCream) {
                 return (PRICE_OF_ONE_COFFEE + 2 + 1) * quantity;
             }
-            return  (PRICE_OF_ONE_COFFEE + 2) * quantity;
+            return (PRICE_OF_ONE_COFFEE + 2) * quantity;
         } else if (hasWhippedCream) {
-            return  (PRICE_OF_ONE_COFFEE + 1) * quantity;
+            return (PRICE_OF_ONE_COFFEE + 1) * quantity;
         } else {
-           return PRICE_OF_ONE_COFFEE  * quantity;
+            return PRICE_OF_ONE_COFFEE * quantity;
         }
     }
 }

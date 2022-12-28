@@ -102,12 +102,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String displayMessage() {
-        return "Name: " + name +
+        return getString(R.string.name) + ": " + name +
                 "\nAdd whipped cream ? " + hasWhippedCream +
                 "\nAdd Chocolate ? " + hasChocolate +
-                "\nQuantity: " + quantity +
-                "\nTotal: " + NumberFormat.getCurrencyInstance().format(calculatePrice()) +
-                "\nThank you!";
+                "\n" + getString(R.string.quantity) + ": " + quantity +
+                "\n" + getString(R.string.total) + ": " + NumberFormat.getCurrencyInstance().format(calculatePrice()) +
+                "\n" + getString(R.string.thank_you) + "!";
     }
 
     /**

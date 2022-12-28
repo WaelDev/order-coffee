@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">pedir cafe</string>
+    <string name="toppings">Adición</string>
+    <string name="quantity">Cantidad</string>
+    <string name="whipped_cream">Crema batida</string>
+    <string name="chocolate">Chocolate</string>
+    <string name="order">Ordenar</string>
+    <string name="order_summary">Resumen del pedido</string>
+    <string name="thank_you">Gracias</string>
+    <string name="name">nombre</string>
+    <string name="total">Total</string>
+</resources>
